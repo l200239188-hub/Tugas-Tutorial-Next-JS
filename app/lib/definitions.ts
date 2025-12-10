@@ -3,6 +3,8 @@ export interface Revenue {
   id: string;
   date: string;
   amount: string; // string, sudah diformat
+  month: string;
+  revenue: number;
 }
 
 // Tipe untuk LatestInvoice (amount string supaya sesuai komponen)
