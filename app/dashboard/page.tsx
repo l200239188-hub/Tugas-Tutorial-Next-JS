@@ -3,14 +3,13 @@ import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import {
-  fetchRevenue,
   fetchLatestInvoices,
-  fetchCardData
+  fetchCardData,
+  fetchRevenueChart, // <--- ganti ini
 } from '@/app/lib/data';
 
 export default async function Page() {
-  // Ambil data dari database
-  const revenue = await fetchRevenue();
+  const revenue = await fetchRevenueChart(); // <--- ganti ini
   const latestInvoices = await fetchLatestInvoices();
   const {
     numberOfCustomers,
