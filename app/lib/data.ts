@@ -28,8 +28,8 @@ export async function fetchRevenueChart(): Promise<RevenueChartItem[]> {
 // =====================
 export async function fetchLatestInvoices(): Promise<LatestInvoice[]> {
   return [
-    { id: '1', name: 'John Doe', email: 'john@example.com', image_url: '/avatar1.jpg', amount: '$1,200' },
-    { id: '2', name: 'Jane Smith', email: 'jane@example.com', image_url: '/avatar2.jpg', amount: '$2,500' },
+    { id: '1', name: 'John Doe', email: 'john@example.com', image_url: '/avatar1.jpg', amount: 1200 },
+    { id: '2', name: 'Jane Smith', email: 'jane@example.com', image_url: '/avatar2.jpg', amount: 2500 },
   ];
 }
 
@@ -40,8 +40,8 @@ export async function fetchCardData(): Promise<CardData> {
   return {
     numberOfInvoices: 12,
     numberOfCustomers: 5,
-    totalPaidInvoices: '$12,300',
-    totalPendingInvoices: '$1,200',
+    totalPaidInvoices: 12300,   // number, format nanti di komponen
+    totalPendingInvoices: 1200, // number, format nanti di komponen
   };
 }
 
@@ -50,7 +50,15 @@ export async function fetchCardData(): Promise<CardData> {
 // =====================
 export async function fetchFilteredInvoices(query: string, currentPage: number) {
   return [
-    { id: '1', amount: '$1,200', date: '2025-01-01', status: 'paid', name: 'John Doe', email: 'john@example.com', image_url: '/avatar1.jpg' }
+    { 
+      id: '1',
+      amount: 1200, 
+      date: '2025-01-01', 
+      status: 'paid', 
+      name: 'John Doe', 
+      email: 'john@example.com', 
+      image_url: '/avatar1.jpg' 
+    }
   ];
 }
 
@@ -59,7 +67,7 @@ export async function fetchInvoicesPages(query: string) {
 }
 
 export async function fetchInvoiceById(id: string) {
-  return { id, customer_id: '1', amount: 12.00, status: 'paid' };
+  return { id, customer_id: '1', amount: 1200, status: 'paid' };
 }
 
 // =====================
@@ -74,6 +82,16 @@ export async function fetchCustomers(): Promise<CustomerField[]> {
 
 export async function fetchFilteredCustomers(query: string): Promise<CustomersTableType[]> {
   return [
-    { id: '1', name: 'John Doe', email: 'john@example.com', image_url: '/avatar1.jpg', total_invoices: 3, total_pendingNumber: 1000, total_pending: '$1,000', total_paidNumber: 5000, total_paid: '$5,000' }
+    { 
+      id: '1', 
+      name: 'John Doe', 
+      email: 'john@example.com', 
+      image_url: '/avatar1.jpg', 
+      total_invoices: 3, 
+      total_pendingNumber: 1000, 
+      total_pending: '$1,000', 
+      total_paidNumber: 5000, 
+      total_paid: '$5,000' 
+    }
   ];
 }
