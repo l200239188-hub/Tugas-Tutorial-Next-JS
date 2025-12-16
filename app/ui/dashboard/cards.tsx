@@ -5,13 +5,7 @@ import {
   InboxIcon,
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
-
-type CardWrapperProps = {
-  numberOfCustomers: number;
-  numberOfInvoices: number;
-  totalPaidInvoices: string;
-  totalPendingInvoices: string;
-};
+import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -20,12 +14,14 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
-export default function CardWrapper({
-  numberOfCustomers,
-  numberOfInvoices,
-  totalPaidInvoices,
-  totalPendingInvoices,
-}: CardWrapperProps) {
+export default async function CardWrapper() {
+  const {
+    numberOfCustomers,
+    numberOfInvoices,
+    totalPaidInvoices,
+    totalPendingInvoices,
+  } = await fetchCardData();
+
   return (
     <>
       <Card title="Collected" value={totalPaidInvoices} type="collected" />
@@ -36,7 +32,7 @@ export default function CardWrapper({
   );
 }
 
-export function Card({
+function Card({
   title,
   value,
   type,
@@ -50,12 +46,12 @@ export function Card({
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
       <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
+        {Icon && <Icon className="h-5 w-5 text-gray-700" />}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
+
       <p
-        className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        className={`${lusitana.className} truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
       >
         {value}
       </p>
