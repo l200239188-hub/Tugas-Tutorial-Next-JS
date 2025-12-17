@@ -1,18 +1,24 @@
 import Form from '@/app/ui/invoices/edit-form';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
+import { notFound } from 'next/navigation';
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
-  const id = params.id;
+export default async function Page(props: { params: { id: string } }) {
+  const id = props.params.id;
 
+  // Ambil invoice dan daftar customers secara paralel
   const [invoice, customers] = await Promise.all([
     fetchInvoiceById(id),
     fetchCustomers(),
   ]);
 
+  // Jika invoice tidak ditemukan, tampilkan 404
+  if (!invoice) {
+    notFound();
+  }
+
   return (
-    <main>
+    <main className="p-4 md:p-8">
       <Breadcrumbs
         breadcrumbs={[
           { label: 'Invoices', href: '/dashboard/invoices' },
