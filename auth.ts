@@ -33,7 +33,7 @@ async function getUser(email: string): Promise<User | undefined> {
     return testUsers.find((user) => user.email === email);
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { auth, signIn, signOut, handlers } = NextAuth({
     ...authConfig,
     providers: [
         Credentials({
