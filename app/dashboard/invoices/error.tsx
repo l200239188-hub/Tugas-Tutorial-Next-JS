@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import * as Sentry from '@sentry/nextjs'; // pastikan sudah install @sentry/nextjs
 
 export default function Error({
   error,
@@ -11,14 +10,8 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log error ke console
+    // Log error to console
     console.error(error);
-
-    // Log error ke Sentry
-    Sentry.captureException(error);
-
-    // Jika pakai service lain seperti LogRocket
-    // LogRocket.captureException(error);
   }, [error]);
 
   return (
